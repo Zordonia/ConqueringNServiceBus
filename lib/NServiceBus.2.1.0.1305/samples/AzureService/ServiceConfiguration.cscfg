@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ServiceConfiguration serviceName="AzureService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration">
+  <Role name="OrderWebSite">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="AzureQueueConfig.ConnectionString" value="UseDevelopmentStorage=true"/>
+      <!--<Setting name="AzureQueueConfig.ConnectionString" value="DefaultEndpointsProtocol=http;AccountName={your account name};AccountKey={your account key}"/>-->
+    </ConfigurationSettings>
+  </Role>
+  <Role name="OrderService">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="AzureQueueConfig.ConnectionString" value="UseDevelopmentStorage=true"/>
+      <!--<Setting name="AzureQueueConfig.ConnectionString" value="DefaultEndpointsProtocol=http;AccountName={your account name};AccountKey={your account key}"/>-->
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
