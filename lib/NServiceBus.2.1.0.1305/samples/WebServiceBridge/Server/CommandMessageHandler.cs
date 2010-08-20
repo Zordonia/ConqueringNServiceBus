@@ -1,4 +1,3 @@
-using System;
 using Messages;
 using NServiceBus;
 
@@ -10,8 +9,6 @@ namespace Server
 
         public void Handle(Command message)
         {
-            Console.WriteLine("======================================================================");
-
             if (message.Id % 2 == 0)
                 Bus.Return((int)ErrorCodes.Fail);
             else 

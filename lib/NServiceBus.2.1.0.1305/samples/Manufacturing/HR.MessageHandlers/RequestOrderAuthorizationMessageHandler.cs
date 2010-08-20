@@ -1,4 +1,3 @@
-using System;
 using HR.Messages;
 using NServiceBus;
 using System.Threading;
@@ -9,8 +8,6 @@ namespace HR.MessageHandlers
     {
         public void Handle(RequestOrderAuthorizationMessage message)
         {
-            Console.WriteLine("======================================================================");
-
             if (message.OrderLines != null)
                 foreach(IOrderLine ol in message.OrderLines)
                     if (ol.Quantity > 50F)

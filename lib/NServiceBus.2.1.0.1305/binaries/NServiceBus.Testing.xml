@@ -496,18 +496,6 @@
       <returns>
       </returns>
     </member>
-    <member name="M:NServiceBus.Testing.Test.Saga``1(``0)">
-      <summary>
-            Begin the test script for the passed in saga instance.
-            Callers need to instantiate the saga's data class as well as give it an ID.
-            </summary>
-      <typeparam name="T">
-      </typeparam>
-      <param name="saga">
-      </param>
-      <returns>
-      </returns>
-    </member>
     <member name="M:NServiceBus.Testing.Test.Handler``1">
       <summary>
             Specify a test for a message handler of type T for a given message of type TMessage.

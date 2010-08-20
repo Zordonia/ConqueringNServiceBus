@@ -11,14 +11,12 @@ namespace Server
 
         public void Handle(Command message)
         {
-            Console.WriteLine("======================================================================");
-
             Thread.Sleep(TimeSpan.FromSeconds(1));
 
             if (message.Id % 2 == 0)
-                Bus.Return(ErrorCodes.Fail);
+                Bus.Return((int)ErrorCodes.Fail);
             else 
-                Bus.Return(ErrorCodes.None);
+                Bus.Return((int)ErrorCodes.None);
         }
     }
 }

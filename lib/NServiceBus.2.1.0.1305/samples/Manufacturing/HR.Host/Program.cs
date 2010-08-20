@@ -1,4 +1,6 @@
 using System;
+using log4net;
+using log4net.Config;
 using NServiceBus;
 
 namespace HR.Host
@@ -7,20 +9,32 @@ namespace HR.Host
     {
         static void Main()
         {
-            var bus = NServiceBus.Configure.With()
-                .Log4Net()
-                .DefaultBuilder()
-                .XmlSerializer()
-                .MsmqTransport()
-                    .IsTransactional(true)
-                    .PurgeOnStartup(false)
-                .UnicastBus()
-                    .ImpersonateSender(false)
-                    .LoadMessageHandlers()
-                .CreateBus()
-                .Start();
+            try
+            {
+                var bus = NServiceBus.Configure.With()
+                    .Log4Net()
+                    .DefaultBuilder()
+                    .XmlSerializer()
+                    .MsmqTransport()
+                        .IsTransactional(true)
+                        .PurgeOnStartup(false)
+                    .UnicastBus()
+                        .ImpersonateSender(false)
+                        .LoadMessageHandlers()
+                    .CreateBus()
+                    .Start();
+            }
+            catch (Exception e)
+            {
+                LogManager.GetLogger("HR").Fatal("Exiting", e);
+                Console.Read();
+            }
 
             Console.Read();
         }
+    }
+
+    internal class HelloJob
+    {
     }
 }

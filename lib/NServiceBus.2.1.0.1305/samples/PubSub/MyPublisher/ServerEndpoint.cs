@@ -25,7 +25,6 @@ namespace MyPublisher
                 Bus.Publish(eventMessage);
 
                 Console.WriteLine("Published event with Id {0}.", eventMessage.EventId);
-                Console.WriteLine("==========================================================================");
 
                 publishIEvent = !publishIEvent;
             }

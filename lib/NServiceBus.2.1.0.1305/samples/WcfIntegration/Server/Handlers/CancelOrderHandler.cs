@@ -1,4 +1,3 @@
-using System;
 using Messages;
 using NServiceBus;
 
@@ -15,12 +14,14 @@ namespace Server.Handlers
 
         public void Handle(CancelOrder message)
         {
-            Console.WriteLine("======================================================================");
-
             if (message.OrderId % 2 == 0)
-                bus.Return((int) ErrorCodes.Fail);
+            {
+                this.bus.Return((int) ErrorCodes.Fail);
+            }
             else
-                bus.Return((int) ErrorCodes.None);
+            {
+                this.bus.Return((int) ErrorCodes.None);
+            }
         }
     }
 }

@@ -20,8 +20,6 @@ namespace OrderService
 
         public void Handle(OrderMessage message)
         {
-            Console.WriteLine("======================================================================");
-
             Data.PurchaseOrderNumber = message.PurchaseOrderNumber;
             Data.PartnerId = message.PartnerId;
             Data.ProvideBy = message.ProvideBy;
@@ -49,8 +47,6 @@ namespace OrderService
 
         public void Handle(OrderAuthorizationResponseMessage message)
         {
-            Console.WriteLine("======================================================================");
-
             var status = GetStatus(
                 (message.Success ? OrderStatusEnum.Authorized : OrderStatusEnum.Rejected),
                 GetOrderLines(message.OrderLines));
@@ -61,13 +57,12 @@ namespace OrderService
             foreach (var ol in message.OrderLines)
                 Data.UpdateAuthorization(message.Success, ol.ProductId, ol.Quantity);
 
-            if (Data.IsAuthorized())
+            if (Data.IsAuthorized)
                 Complete();
         }
 
         public void Handle(CancelOrderMessage message)
         {
-            Console.WriteLine("======================================================================");
 
         }
 
@@ -83,8 +78,6 @@ namespace OrderService
 
         public override void Timeout(object state)
         {
-            Console.WriteLine("======================================================================");
-
             Complete();
         }
 

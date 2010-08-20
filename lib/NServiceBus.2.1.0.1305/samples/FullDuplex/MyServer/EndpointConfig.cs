@@ -10,8 +10,7 @@ namespace MyServer
     {
         public void Init()
         {
-            Configure.Instance
-                .RijndaelEncryptionService();
+            Configure.Instance.RijndaelEncryptionService();
         }
     }
 }
