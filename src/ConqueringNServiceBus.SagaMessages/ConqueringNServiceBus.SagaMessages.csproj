@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2077ACD7-908D-48D0-9113-54DDB4F14ADB}</ProjectGuid>
+    <ProjectGuid>{244CE6F1-58E5-40CA-B13B-B523815BB91B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConqueringNserviceBus.Receiver</RootNamespace>
-    <AssemblyName>ConqueringNserviceBus.Receiver</AssemblyName>
+    <RootNamespace>ConqueringNServiceBus.SagaMessages</RootNamespace>
+    <AssemblyName>ConqueringNServiceBus.SagaMessages</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,23 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="NServiceBus">
       <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\NServiceBus.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\NServiceBus.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Host">
-      <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\NServiceBus.Host.exe</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.ObjectBuilder.StructureMap">
-      <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\containers\structuremap\NServiceBus.ObjectBuilder.StructureMap.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap">
-      <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\containers\structuremap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,21 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyMessageHandler.cs" />
-    <Compile Include="ReceivingEndpointConfig.cs" />
+    <Compile Include="BeginSagaMessage.cs" />
+    <Compile Include="ContinueSagaMessage.cs" />
+    <Compile Include="EndSagaMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ConqueringNServiceBus.Messages\ConqueringNServiceBus.Messages.csproj">
-      <Project>{B1D37566-4C63-4884-A27B-90784C1C5E30}</Project>
-      <Name>ConqueringNServiceBus.Messages</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="log4net.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

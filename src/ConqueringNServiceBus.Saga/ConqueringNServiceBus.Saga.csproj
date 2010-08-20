@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2077ACD7-908D-48D0-9113-54DDB4F14ADB}</ProjectGuid>
+    <ProjectGuid>{F49EEF46-3F2E-46AA-81F7-43250DE393D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConqueringNserviceBus.Receiver</RootNamespace>
-    <AssemblyName>ConqueringNserviceBus.Receiver</AssemblyName>
+    <RootNamespace>ConqueringNServiceBus.Saga</RootNamespace>
+    <AssemblyName>ConqueringNServiceBus.Saga</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,8 +31,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\lib\NHibernate\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\lib\NHibernate\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\lib\NHibernate\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\lib\NHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.v4.0">
+      <HintPath>..\..\..\..\My Dropbox\Apps\überprof\NHibernate\HibernatingRhinos.Profiler.Appender.v4.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\lib\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
-      <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\log4net.dll</HintPath>
+      <HintPath>..\..\lib\NHibernate\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\lib\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\..\lib\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus">
       <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\NServiceBus.dll</HintPath>
@@ -47,11 +70,15 @@
     <Reference Include="NServiceBus.ObjectBuilder.StructureMap">
       <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\containers\structuremap\NServiceBus.ObjectBuilder.StructureMap.dll</HintPath>
     </Reference>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\..\lib\NHibernate\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\..\lib\NServiceBus.2.1.0.1305\binaries\containers\structuremap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,21 +86,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyMessageHandler.cs" />
-    <Compile Include="ReceivingEndpointConfig.cs" />
+    <Compile Include="Child.cs" />
+    <Compile Include="ChildMap.cs" />
+    <Compile Include="EndpointConfig.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MyMessageModule.cs" />
+    <Compile Include="MyProfileLoggingHandler.cs" />
+    <Compile Include="MySaga.cs" />
+    <Compile Include="MyProfile.cs" />
+    <Compile Include="MySagaData.cs" />
+    <Compile Include="MySagaDataMap.cs" />
+    <Compile Include="MySagaFinder.cs" />
+    <Compile Include="MySagaPersister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App.config" />
+    <Compile Include="SagaRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConqueringNServiceBus.Messages\ConqueringNServiceBus.Messages.csproj">
       <Project>{B1D37566-4C63-4884-A27B-90784C1C5E30}</Project>
       <Name>ConqueringNServiceBus.Messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConqueringNServiceBus.SagaMessages\ConqueringNServiceBus.SagaMessages.csproj">
+      <Project>{244CE6F1-58E5-40CA-B13B-B523815BB91B}</Project>
+      <Name>ConqueringNServiceBus.SagaMessages</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="log4net.config" />
+    <Content Include="schema.sql" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

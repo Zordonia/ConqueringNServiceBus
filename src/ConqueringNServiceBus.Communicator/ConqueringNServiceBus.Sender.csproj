@@ -91,6 +91,15 @@
       <Project>{B1D37566-4C63-4884-A27B-90784C1C5E30}</Project>
       <Name>ConqueringNServiceBus.Messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConqueringNServiceBus.SagaMessages\ConqueringNServiceBus.SagaMessages.csproj">
+      <Project>{244CE6F1-58E5-40CA-B13B-B523815BB91B}</Project>
+      <Name>ConqueringNServiceBus.SagaMessages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
